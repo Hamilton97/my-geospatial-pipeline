@@ -6,7 +6,7 @@ services:
       target: runner
     container_name: rs_conda_pipeline
     volumes:
-      - ./src:/app/src
+      - .:/app
       - ./data:/app/data
     stdin_open: true
     tty: true

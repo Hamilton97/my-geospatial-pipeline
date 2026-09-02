@@ -10,10 +10,17 @@ COPY --chown=$MAMBA_USER:$MAMBA_USER environment.yml /tmp/environment.yml
 RUN micromamba install -y -n base -f /tmp/environment.yml && \
     micromamba clean --all --yes
 
+    
 # ==========================================
 # STAGE 2: Production Runtime
 # ==========================================
 FROM mambaorg/micromamba:latest AS runner
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    nano \
+    && rm -rf /var/lib/apt/lists/*
+USER $MAMBA_USER
 
 USER root
 WORKDIR /app
@@ -30,5 +37,3 @@ COPY src/ /app/src/
 
 # Run as a non-root user
 USER $MAMBA_USER
-
-# CMD ["python", "src/process_raster.py"]
