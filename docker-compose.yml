@@ -1,0 +1,16 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    container_name: rs_conda_pipeline
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+    stdin_open: true
+    tty: true
+    shm_size: '2gb'
+    environment:
+      - PYTHONUNBUFFERED=1
+      - GDAL_CACHEMAX=512

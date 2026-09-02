@@ -1,0 +1,32 @@
+{
+  "name": "Geospatial Conda Dev Environment",
+  
+  // Point directly to your existing docker-compose setup
+  "dockerComposeFile": "../docker-compose.yml",
+  
+  // Name of the service defined in your docker-compose.yml
+  "service": "app",
+  
+  // The folder inside the container where VS Code should open
+  "workspaceFolder": "/app",
+
+  // Customizations applied when VS Code connects to the container
+  "customizations": {
+    "vscode": {
+      // Install essential Python & Geospatial extensions inside the container
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff"
+      ],
+      "settings": {
+        // Point VS Code directly to the Conda Python executable inside the container
+        "python.defaultInterpreterPath": "/opt/conda/bin/python",
+        "python.analysis.extraPaths": ["/app/src"]
+      }
+    }
+  },
+
+  // Keep container alive and run commands as the non-root mambauser
+  "remoteUser": "mambauser"
+}

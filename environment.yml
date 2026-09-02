@@ -1,0 +1,14 @@
+name: base
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - gdal
+  - geopandas
+  - xarray
+  - rioxarray
+  - numpy
+  - rasterio
+  - scikit-learn
+  - pip
